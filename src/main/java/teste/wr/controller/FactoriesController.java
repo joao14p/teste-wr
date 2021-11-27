@@ -3,6 +3,7 @@ package teste.wr.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -43,7 +44,11 @@ public class FactoriesController {
 		repo.save(factories);		
 	}
 	
+	/*Por motivos de segurança(autorização/autenticação), 
+	a opção de apagar carros, ficará restrito para uso apenas 
+	dos perfis de 'administrador'.*/
 	@DeleteMapping(value="/{id}")
+	@PreAuthorize("hasRole('ADMIN')")
 	public void delete(@PathVariable("id") Long id) {
 		repo.deleteById(id);
 	}

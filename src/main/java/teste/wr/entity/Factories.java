@@ -16,7 +16,6 @@ public class Factories{
 
 	
 	@Id
-	//@GeneratedValue
 	@Column(name="id")
 	private Long id;
 	@Column(name="name")
